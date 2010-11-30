@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project basedir="." name="BonniePlayer">
+	<!-- Properties -->
+	<property name="web.home" location="web" />
+	<property file="build.properties" />
+	<property name="client.jar.file" value="BonniePlayer.jar" />
+	<property environment="env" />
+
+	<target name="copy-libs">
+		<unzip src="lib/basicplayer3.0.jar" dest="bin" />
+        <unzip src="lib/commons-logging-api.jar" dest="bin" />
+        <unzip src="lib/jl1.0.jar" dest="bin" />
+        <unzip src="lib/mp3spi1.9.4.jar" dest="bin" />
+        <unzip src="lib/tritonus_share.jar" dest="bin" />
+	</target>
+
+	<target name="dist-client" depends="copy-libs">
+		<jar destfile="${web.home}/${client.jar.file}" manifest="src/META-INF/MANIFEST.MF">
+			<fileset dir="bin" />
+		</jar>
+	</target>
+	<target name="sign-client" depends="dist-client">
+		<signjar jar="${web.home}/${client.jar.file}" storepass="storepass" alias="alias" keystore="keystore" keypass="keypass" />
+	</target>
+</project>

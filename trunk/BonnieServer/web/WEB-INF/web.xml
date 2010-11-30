@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<web-app xmlns="http://java.sun.com/xml/ns/j2ee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd"
+	version="2.4">
+
+	<display-name>Bonnie Longears</display-name>
+	<description>Hear hear!</description>
+
+	<servlet>
+		<servlet-name>QueryServlet</servlet-name>
+		<servlet-class>
+			edu.ucla.bonnie.server.QueryServlet
+		</servlet-class>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>QueryServlet</servlet-name>
+		<url-pattern>/query</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>ResultsServlet</servlet-name>
+		<servlet-class>
+			edu.ucla.bonnie.server.ResultsServlet
+        </servlet-class>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>ResultsServlet</servlet-name>
+		<url-pattern>/results</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>DebugServlet</servlet-name>
+		<servlet-class>
+			edu.ucla.bonnie.server.DebugServlet
+        </servlet-class>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>DebugServlet</servlet-name>
+		<url-pattern>/debug</url-pattern>
+	</servlet-mapping>
+</web-app>

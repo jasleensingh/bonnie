@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project basedir="." name="BonnieIndex_Hadoop">
+	<!-- Properties -->
+	<property name="hadoop.home" value="${user.home}/Software/hadoop-0.21.0" />
+	<property name="web.home" location="web" />
+	<property file="build.properties" />
+	<property name="client.jar.file" value="bonnie_indexer.jar" />
+	<property environment="env" />
+	<property name="bonnie.home" location="${env.BONNIE_HOME}" />
+
+	<target name="copy-libs">
+		<unzip src="lib/bonnie_common.jar" dest="bin" />
+	</target>
+
+	<target name="dist-client" depends="copy-libs">
+		<jar destfile="${web.home}/${client.jar.file}" manifest="src/META-INF/MANIFEST.MF">
+			<fileset dir="bin" />
+		</jar>
+	</target>
+
+	<target name="copy-jar" depends="dist-client">
+		<copy todir="${bonnie.home}/lib" file="${web.home}/${client.jar.file}" />
+	</target>
+</project>
