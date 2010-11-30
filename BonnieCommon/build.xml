@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project basedir="." name="BonnieCommon">
+	<!-- Properties -->
+	<property name="web.home" location="web" />
+	<property file="build.properties" />
+	<property name="client.jar.file" value="bonnie_common.jar" />
+	<property environment="env" />
+
+    <target name="copy-libs">
+        <unzip src="lib/jtransforms-2.3.jar" dest="bin" />
+    </target>
+
+	<target name="dist-client" depends="copy-libs">
+		<jar destfile="${web.home}/${client.jar.file}">
+			<fileset dir="bin" />
+		</jar>
+	</target>
+</project>

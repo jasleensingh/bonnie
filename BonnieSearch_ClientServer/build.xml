@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project basedir="." name="BonnieSearch_ClientServer">
+	<!-- Properties -->
+	<property name="hadoop.home" value="${user.home}/Software/hadoop-0.21.0" />
+	<property name="web.home" location="web" />
+	<property file="build.properties" />
+	<property name="client.jar.file" value="bonnie_searchclient.jar" />
+	<property name="server.jar.file" value="bonnie_searchserver.jar" />
+	<property environment="env" />
+	<property name="bonnie.home" location="${env.BONNIE_HOME}" />
+
+	<target name="copy-libs">
+		<unzip src="lib/bonnie_common.jar" dest="bin" />
+	</target>
+
+	<target name="dist-client" depends="copy-libs">
+		<jar destfile="${web.home}/${client.jar.file}">
+			<fileset dir="bin" excludes="edu/ucla/bonnie/search_server/" />
+		</jar>
+	</target>
+
+	<target name="copy-clientjar" depends="dist-client">
+		<copy todir="${bonnie.home}/lib" file="${web.home}/${client.jar.file}" />
+	</target>
+
+	<target name="dist-server" depends="copy-libs">
+		<jar destfile="${web.home}/${server.jar.file}" manifest="src/META-INF/MANIFEST.MF">
+			<fileset dir="bin" excludes="edu/ucla/bonnie/search_client/" />
+		</jar>
+	</target>
+
+	<target name="copy-serverjar" depends="dist-server">
+		<copy todir="${bonnie.home}/lib" file="${web.home}/${server.jar.file}" />
+	</target>
+</project>
